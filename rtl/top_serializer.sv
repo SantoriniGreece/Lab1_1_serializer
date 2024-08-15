@@ -22,9 +22,9 @@ module top_serializer (
     assign mod_val      = (i_data_mod == 0) | (i_data_mod > 2);
     assign enable       = i_data_val & ~busy & mod_val;
     
-    always_comb begin 
+    always_ff @( posedge clk ) begin 
         if (enable)
-            threshold = i_data_mod;
+            threshold <= i_data_mod;
     end
 
     always_ff @( posedge clk ) begin : shift_register
@@ -50,7 +50,7 @@ module top_serializer (
             busy <= 0;
         end 
         else
-            cnt  <= cnt + 1;
+            cnt  <= cnt + 4'd1;
     end
 
     assign o_ser_data       = tmp[15] & busy;
