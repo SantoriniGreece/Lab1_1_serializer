@@ -53,7 +53,7 @@ module top_serializer (
             cnt  <= cnt + 4'd1;
     end
 
-    assign o_ser_data       = tmp[15] & busy;
+    assign o_ser_data       = tmp[15];
     assign o_ser_data_val   = busy;
     assign o_busy           = busy;
     
